@@ -15,4 +15,10 @@ export const routes = [
         component: TestView,
         hidden: true
     },
+    {
+        path: '/tests/:id',
+        name: 'Show Description',
+        component: TestView,
+        hidden: true
+    },
 ]

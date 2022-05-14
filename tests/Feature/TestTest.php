@@ -25,12 +25,15 @@ class TestTest extends TestCase
         $this->actingAs($this->user)
             ->postJson(route('tests.store'), [
                 'name' => 'Lorem',
+                'description' => 'Loremorem',
             ])
             ->assertSuccessful()
             ->assertJson(['type' => Controller::RESPONSE_TYPE_SUCCESS]);
 
         $this->assertDatabaseHas('tests', [
             'name' => 'Lorem',
+            'description' => 'Loremorem',
+
         ]);
     }
 
@@ -42,6 +45,8 @@ class TestTest extends TestCase
         $this->actingAs($this->user)
             ->putJson(route('tests.update', $test->id), [
                 'name' => 'Updated test',
+                'description' => 'Loremoremo',
+
             ])
             ->assertSuccessful()
             ->assertJson(['type' => Controller::RESPONSE_TYPE_SUCCESS]);
@@ -49,6 +54,8 @@ class TestTest extends TestCase
         $this->assertDatabaseHas('tests', [
             'id' => $test->id,
             'name' => 'Updated test',
+            'description' => 'Loremoremo',
+
         ]);
     }
 
@@ -63,6 +70,7 @@ class TestTest extends TestCase
             ->assertJson([
                 'data' => [
                     'name' => $test->name,
+                    'description' => $test->description,
                 ],
             ]);
     }
@@ -71,7 +79,7 @@ class TestTest extends TestCase
     public function list_test()
     {
         $tests = Test::factory()->count(2)->create()->map(function ($test) {
-            return $test->only(['id', 'name']);
+            return $test->only(['id', 'name', 'description']);
         });
 
         $this->actingAs($this->user)
@@ -82,7 +90,7 @@ class TestTest extends TestCase
             ])
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'name'],
+                    '*' => ['id', 'name', 'description'],
                 ],
                 'links',
                 'meta',
@@ -94,6 +102,7 @@ class TestTest extends TestCase
     {
         $test = Test::factory()->create([
             'name' => 'Test for delete',
+            'description' => 'Test for delete',
         ]);
 
         $this->actingAs($this->user)
@@ -104,6 +113,7 @@ class TestTest extends TestCase
         $this->assertDatabaseMissing('tests', [
             'id' => $test->id,
             'name' => 'Test for delete',
+            'description' => 'Test for delete',
         ]);
     }
 }

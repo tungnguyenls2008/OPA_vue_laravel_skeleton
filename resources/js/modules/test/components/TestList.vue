@@ -80,7 +80,7 @@
                         class="el-link el-link--default ellipsis-form"
                     >
                         <span class="el-link--inner item_name">
-                            {{ scope.row.name }}
+                            {{ scope.row.description }}
                         </span>
                     </router-link>
                 </template>
@@ -93,7 +93,7 @@
                 width="200"
             >
                 <template slot-scope="updated_at">
-                    {{ GlobalFormatDate(updated_at.row.updated_at) }}
+                    {{ $moment(updated_at.row.updated_at).format('DD/MM/YYYY HH:mm') }}
                 </template>
             </el-table-column>
             <el-table-column

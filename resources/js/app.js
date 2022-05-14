@@ -7,8 +7,11 @@ import store from './core/store'
 import globalMixin from './includes/mixins/globalMixin'
 import auth from './bootstrap/auth'
 import './bootstrap/day'
+import VueMoment from 'vue-moment'
 
 Vue.use(ElementUI, {i18n: (key, value) => i18n.t(key, value)})
+
+Vue.use(VueMoment)
 
 Vue.prototype.config = window.config
 

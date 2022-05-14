@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Test;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TestFactory extends Factory
 {
@@ -23,6 +23,7 @@ class TestFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
+            'description' => $this->faker->word,
         ];
     }
 }
